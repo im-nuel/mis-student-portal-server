@@ -1,0 +1,7 @@
+/node_modules
+/lib
+/public/*
+!/public/.gitkeep
+
+.env.local
+package-lock.json
