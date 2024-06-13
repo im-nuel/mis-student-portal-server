@@ -11,7 +11,12 @@
   },
   "mysql": {
     "client": "mysql",
-    "connection": "mysql://root:password@localhost:3306/mis-portal-server"
+    "connection": "MYSQL_CONNECTION"
+  },
+  "imagekit": {
+    "public_key": "IMAGEKIT_PUBLIC_KEY",
+    "private_key": "IMAGEKIT_PRIVATE_KEY",
+    "url_endpoint": "IMAGEKIT_URL"
   },
   "authentication": {
     "entity": "user",

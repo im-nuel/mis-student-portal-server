@@ -122,7 +122,7 @@ export const studentSchema = Type.Object(
     updated_at: typeboxNullable(Type.String()),
 
     user_id: typeboxNullable(Type.Number()),
-    user: Type.Ref(userSchema),
+    user: Type.Ref(userSchema)
   },
   { $id: 'Student', additionalProperties: false }
 )
@@ -142,7 +142,8 @@ export const studentDataValidator = getValidator(studentDataSchema, dataValidato
 export const studentDataResolver = resolve<Student, HookContext<StudentService>>({
   // created_at: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' ')),
   // updated_at: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' ')),
-  register_date: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' '))
+  register_date: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' ')),
+  // date_of_birth: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' '))
 })
 
 // Schema for updating existing entries

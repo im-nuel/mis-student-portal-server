@@ -8,7 +8,12 @@ export const configurationSchema = Type.Intersect([
   Type.Object({
     host: Type.String(),
     port: Type.Number(),
-    public: Type.String()
+    public: Type.String(),
+    imagekit: Type.Object({
+      public_key: Type.String(),
+      private_key: Type.String(),
+      url_endpoint: Type.String()
+    })
   })
 ])
 

@@ -4,6 +4,14 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { documentFoldersClient } from './services/document-folders/document-folders.shared'
+export type {
+  DocumentFolders,
+  DocumentFoldersData,
+  DocumentFoldersQuery,
+  DocumentFoldersPatch
+} from './services/document-folders/document-folders.shared'
+
 import { siteConfigClient } from './services/site-config/site-config.shared'
 export type {
   SiteConfig,
@@ -52,5 +60,6 @@ export const createClient = <Configuration = any,>(
   client.configure(userClient)
   client.configure(documentTemplatesClient)
   client.configure(siteConfigClient)
+  client.configure(documentFoldersClient)
   return client
 }

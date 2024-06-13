@@ -1,6 +1,7 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/application.html
-import 'dotenv/config';
 import { feathers } from '@feathersjs/feathers'
+import dotenv from 'dotenv'
+dotenv.config({ path: ['.env.local', '.env'] })
 import configuration from '@feathersjs/configuration'
 import { koa, rest, bodyParser, errorHandler, parseAuthentication, cors, serveStatic } from '@feathersjs/koa'
 import socketio from '@feathersjs/socketio'
@@ -12,7 +13,7 @@ import { mysql } from './mysql'
 import { authentication } from './authentication'
 import { services } from './services/index'
 import { channels } from './channels'
-import { imagekit } from './middleware/imagekit'
+import { imagekit } from './imagekit'
 
 const app: Application = koa(feathers())
 
@@ -35,12 +36,11 @@ app.configure(
     }
   })
 )
+app.configure(imagekit)
 app.configure(mysql)
 app.configure(authentication)
 app.configure(services)
 app.configure(channels)
-
-app.configure(imagekit())
 
 // Register hooks that run on all service methods
 app.hooks({
