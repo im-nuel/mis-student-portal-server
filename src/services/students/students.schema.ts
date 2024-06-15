@@ -13,41 +13,41 @@ import { userSchema } from '../users/users.schema'
 // Main data model schema
 export const studentSchema = Type.Object(
   {
-    id: typeboxNullable(Type.Number()),
-    nisn: typeboxNullable(Type.String()),
+    id: typeboxNullable([Type.Number(), Type.String()]),
+    nisn: typeboxNullable([Type.String()]),
 
-    last_name: typeboxNullable(Type.String()),
+    last_name: typeboxNullable([Type.String()]),
     first_name: Type.String(),
-    middle_name: typeboxNullable(Type.String()),
-    nickname: typeboxNullable(Type.String()),
+    middle_name: typeboxNullable([Type.String()]),
+    nickname: typeboxNullable([Type.String()]),
 
-    rank_in_family: typeboxNullable(Type.String()),
-    citizenship: typeboxNullable(Type.String()),
-    age: typeboxNullable(Type.Number()),
+    rank_in_family: typeboxNullable([Type.String()]),
+    citizenship: typeboxNullable([Type.String()]),
+    age: typeboxNullable([Type.Number(), Type.String()]),
     place_of_birth: Type.String(),
     date_of_birth: Type.String(),
     gender: Type.Enum({
       male: 'male',
       femail: 'female'
     }),
-    address: typeboxNullable(Type.String()),
-    phone_number: typeboxNullable(Type.String()),
-    email: typeboxNullable(Type.String()),
-    previous_school: typeboxNullable(Type.String()),
+    address: typeboxNullable([Type.String()]),
+    phone_number: typeboxNullable([Type.String()]),
+    email: typeboxNullable([Type.String()]),
+    previous_school: typeboxNullable([Type.String()]),
     religion: Type.String(),
-    status: typeboxNullable(
+    status: typeboxNullable([
       Type.Enum({
         new: 'new',
         old: 'old',
         transfer: 'transfer'
       })
-    ),
-    semester: typeboxNullable(Type.String()),
+    ]),
+    semester: typeboxNullable([Type.String()]),
     school_year: Type.String(),
-    registration_number: typeboxNullable(Type.String()),
+    registration_number: typeboxNullable([Type.String()]),
     academic_status: Type.String(),
-    asother: typeboxNullable(Type.String()),
-    family_card_number: typeboxNullable(Type.String()),
+    asother: typeboxNullable([Type.String()]),
+    family_card_number: typeboxNullable([Type.String()]),
     section: Type.Enum({
       ECP: 'ECP',
       ES: 'ES',
@@ -75,12 +75,12 @@ export const studentSchema = Type.Object(
     other_program: Type.String(),
 
     transportation: Type.Union([Type.Null(), Type.String()]),
-    transportation_policy: typeboxNullable(Type.String()),
+    transportation_policy: typeboxNullable([Type.String()]),
     pick_up_point: Type.Union([Type.Null(), Type.String()]),
 
-    residence_hall: typeboxNullable(Type.String()),
-    residence_hall_policy: typeboxNullable(Type.String()),
-    residence_hall_payment: typeboxNullable(Type.String()),
+    residence_hall: typeboxNullable([Type.String()]),
+    residence_hall_policy: typeboxNullable([Type.String()]),
+    residence_hall_payment: typeboxNullable([Type.String()]),
 
     father_name: Type.Union([Type.Null(), Type.String()]),
     father_occupation: Type.Union([Type.Null(), Type.String()]),
@@ -104,7 +104,7 @@ export const studentSchema = Type.Object(
     tuition_fee: Type.String(),
     finance_policy: Type.String(),
 
-    register_date: Type.String({ format: 'date-time' }),
+    register_date: Type.String(),
 
     document_approval: Type.String(),
     test_approval: Type.String(),
@@ -116,12 +116,12 @@ export const studentSchema = Type.Object(
       graduated: 'graduated'
     }),
 
-    profile_image_url: typeboxNullable(Type.String()),
+    profile_image_url: typeboxNullable([Type.String()]),
 
-    created_at: typeboxNullable(Type.String()),
-    updated_at: typeboxNullable(Type.String()),
+    created_at: typeboxNullable([Type.String()]),
+    updated_at: typeboxNullable([Type.String()]),
 
-    user_id: typeboxNullable(Type.Number()),
+    user_id: typeboxNullable([Type.Number()]),
     user: Type.Ref(userSchema)
   },
   { $id: 'Student', additionalProperties: false }
@@ -142,7 +142,7 @@ export const studentDataValidator = getValidator(studentDataSchema, dataValidato
 export const studentDataResolver = resolve<Student, HookContext<StudentService>>({
   // created_at: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' ')),
   // updated_at: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' ')),
-  register_date: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' ')),
+  register_date: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' '))
   // date_of_birth: async (value) => (value ? value : new Date().toISOString().slice(0, 19).replace('T', ' '))
 })
 
@@ -207,12 +207,12 @@ export const studentQueryProperties = Type.Pick(studentSchema, [
   'residence_hall',
   'school_year',
   'section',
-  'semester',
-  'status',
+  'semester'
+  // 'status',
   // 'test_approval',
-  'transportation_policy',
-  'transportation',
-  'tuition_fee'
+  // 'transportation_policy',
+  // 'transportation',
+  // 'tuition_fee'
 ])
 
 export const studentQuerySchema = Type.Intersect(

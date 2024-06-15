@@ -19,6 +19,7 @@ import { StudentService, getOptions } from './students.class'
 import { studentPath, studentMethods } from './students.shared'
 import { convertDate } from '../../hooks/convert-date'
 import { convertBoolean } from '../../hooks/convert-boolean'
+import { createOrUpdate } from '../../hooks/create-or-update'
 
 export * from './students.class'
 export * from './students.schema'
@@ -58,7 +59,8 @@ export const student = (app: Application) => {
       create: [
         convertDate(['date_of_birth', 'register_date']),
         schemaHooks.validateData(studentDataValidator),
-        schemaHooks.resolveData(studentDataResolver)
+        schemaHooks.resolveData(studentDataResolver),
+        createOrUpdate()
       ],
       patch: [
         convertDate(['date_of_birth', 'register_date']),
